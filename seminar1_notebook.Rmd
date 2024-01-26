@@ -1,0 +1,216 @@
+---
+title: "Seminar1"
+output:
+  html_document:
+    df_print: paged
+---
+
+Dette er seminar 1 i Econ 2130 våren 2024.
+
+Oppgave 1:
+Rundt oss er det mange vinduer.
+
+Vinduet som du leser nå er editoren. Her kan vi skrive tekst, tall eller kode og lagre det som filer.
+Dette er litt som en word program for kode. Og brukes til å lage r filer som for kode er litt som word filer er for word.
+
+Under oss finner vi terminalen og consolen. Det er også et vindu som viser kjøringer.
+Console kan bruke til å kode direkte. Vi bruker den ikke til vanlig, siden det er bedre å lagre flere operasjoner i ett script(generelt navn for kodefil) og så kjøre hele scriptet.
+
+Terminalen er an annen måte å forholde seg til pcen på en med mus og gui. Det tillatter en å orientere seg med kun tastaturet. Det kan også brukes til å instalerre pakker og last ned kode fra github. JEg anbefaler dere å prøve dere litt fram i terminalen. Det kjører over windows, men minner om linux. Det bruker BASH kommandoer.
+
+Til høyre er det to vinduer. Det øverste i fanen "environment" kan du se alt som er lagret i miljøet. Det kan være verdier lagrer i en variabel. Den kan være string values. Og mer komplekse datatyper som en dataframe(Excel ark men bedre). De andre fanen bryr vi oss ikke så mye om. Jeg vil også anbefale dere å ikke bruke dette vinduet så mye. Det kan fort bli en krykke.
+
+Under dette vinduet er et vindu alla filutforsker. De andre fanene inneholder også interessant info. Help er et dokumentasjonsvindu. Det kan være veldig nyttig. Alle funksjoner kan søker på via kode ?funksjon og du får opp dokumentasjonen om funksjonen.
+
+Dersom du ploter noe vil det kommer opp i plot fanen.
+
+3 Variabler
+
+Akkurat som i matte kan vi bruker bokstaver til å lagre ting i. Litt som en boks, legger vi noe oppe i bokser. Dette gjør at som i matte kan vi bruke generiske symboler til å representere funksjoner som kan få forskjelige verdier.
+
+Vi bruker <- for å lagre en variabel i r. Du kan bruke = også.
+
+a)
+
+```{r}
+a <- 5
+```
+
+Oppe til høyre kan du nå se at a = 5
+
+b)
+a inneholder nå 5 og kan som en x i matte brukes til å gjøre matte med andre tall eller variable.
+
+```{r}
+
+b <- a*5
+
+#Lurer på hva som skjer
+c <- b - a
+
+```
+
+
+Før 4 Datatyper
+
+```{r}
+1
+print("1 er ett tall, i maskinen er det numeric eller bredere brukt ord integer(kortnavn int)")
+
+print("Du kan ta 1+1 og faa 2")
+1+1
+
+print("Vi har ogsaa verider som ikke er numeric/int, r kaller dem characters, men det er vanligere aa si string(kortnavn str)")
+"a"
+
+print("Tall kan lagres som str")
+"1"
+print("Men du kan ikke gjoore '1'+'2', kun 1+2")
+
+1+2
+
+print("Prov aa kjore koden under, du bor faa feilmelding")
+```
+
+
+
+
+4 Vektorer er en liste men kun en data type
+
+
+```{r}
+
+vektor_mixed <- c("a",1,"b",2)
+
+vektor_str <- c("a","b","c","d")
+
+vektor_int <- c(1,2,3,4)
+```
+
+
+a) La oss lagre åtte dager med temperaturer i ent vector som int i celsius
+
+```{r}
+temperatur_celsius <- c(25,17,24,25,15,17,19,25)
+```
+
+b) Nå bør du kunne se en vector oppe til høyre. La os printe den i consolen
+
+```{r}
+temperatur_celsius
+```
+Ved å bare skrive navnet får vi ut verdiene fra vectoren.
+
+
+En vector inneholder også info på en spesifikk plass. Vi kan bruke indeksen for å hente ut en verdi. La os hente ut verdien på den tredje dagen.
+
+```{r}
+temperatur_celsius[3]
+```
+La oss prøve å hente flere dager hva med dag 2 til og med 4.
+
+
+```{r}
+temperatur_celsius[2:4]
+```
+
+
+c) Kanskje vi ikke ønsker å ha temperatur i celsius. Fahrenheit hadde vært greit.Formelen er å gange med 9/5 og legge til 32. Når vi tokk 5 ganger a fikk vi ut b. En vector kan også gjøre matte med, og operasjonen vil bli gjort mot alle elementer i vectoren.
+
+
+```{r}
+temp.f <- temperatur_celsius*(9/5)+32
+```
+
+
+```{r}
+convert_celsius_to_fahrenheit <- function(vector_celsius){
+  temp_f <- vector_celsius*(9/5)+32
+  return(temp_f)
+}
+```
+
+```{r}
+convert_celsius_to_fahrenheit(temperatur_celsius)
+```
+
+
+d)
+
+```{r}
+temp.f
+```
+
+
+5
+
+```{r}
+frekvenstabell <- table(temp.f)
+frekvenstabell
+```
+6
+plot er den integrert plotting funksjonen til r, du kan sjekke ut plotly eller ggplot om du ønsker finere grafer.
+
+
+```{r}
+plot(frekvenstabell)
+```
+
+7 En dataframe(dataramme) er en mer kompleks datatype. Det er et objekt som inneholder andre datatyper i en struktur alla et excel ark. Vi vil bruke det flere ganger i dette kurset. Det er sånn vi forholder oss til data som regel. 
+
+a, b
+
+```{r}
+alder <- c(31,33,35,37,39)
+inntekt <- c(55,60,45,25,58)
+
+```
+
+
+c)
+
+```{r}
+personer <- data.frame(alder,inntekt)
+```
+d) Samme som før, skriv objektet du ønsker å se, så blir det printet ut.
+```{r}
+personer
+```
+
++++
+Praktiske funksjoner å kunne for dataframes
+
+```{r}
+#Head viser de fem første radene, her var det bare fem rader.
+head(personer)
+```
+
+```{r}
+# summary kan gi og noe grunnlegende info om et dataframe
+summary(personer)
+```
+
+e) Dersom vi ønsker å legge til en kolonne til dataframen kan det gjøres med df$ny_kolonne <- verdier
+
+```{r}
+personer$innt.euro <- personer$inntekt/10.25
+personer
+```
+f)
+```{r}
+personer[3,]
+```
+
+g)
+```{r}
+noen.personer <- personer[1:4,]
+```
+
+
+
+h)
+
+```{r}
+noen.aldre <- personer$alder[1:3]
+```
+
